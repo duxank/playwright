@@ -33,11 +33,13 @@ test('Full CRUD cycle on JSONPlaceholder', async ({ request }) => {
     body: 'This post has been updated via PUT',
   };
 
+  // PUT on an existing post (id=1)
   const putResponse = await request.put(
-    `https://jsonplaceholder.typicode.com/posts/${postBody.id}`,
-    { data: updatedPost }
+    `https://jsonplaceholder.typicode.com/posts/1`,
+    { data: { ...updatedPost, id: 1 } }
   );
   expect(putResponse.status()).toBe(200);
+
   const putBody = await putResponse.json();
   console.log('PUT:', putBody);
 
